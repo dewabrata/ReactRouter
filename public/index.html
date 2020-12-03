@@ -1,43 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Next Level HTML CSS Template</title>
+<!--
+Next Level CSS Template
+https://templatemo.com/tm-532-next-level
+-->
+    <link rel="stylesheet"  href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" />
+    <link rel="stylesheet" href="css/all.min.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/templatemo-style.css" />
+    
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+    <div id ="root">
+    
+  </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/parallax.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+    
+    <script src="js/imagesloaded.pkgd.min.js"></script>
+    <script src="js/isotope.pkgd.min.js"></script>
+    
+    <script >
+     function myFunction() {
+ 
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+        /* Isotope Gallery */
+
+        // init isotope
+        var $gallery = $(".tm-gallery").isotope({
+          itemSelector: ".tm-gallery-item",
+          layoutMode: "fitRows"
+        });
+        // layout Isotope after each image loads
+        $gallery.imagesLoaded().progress(function() {
+          $gallery.isotope("layout");
+        });
+
+        $(".filters-button-group").on("click", "a", function() {
+          var filterValue = $(this).attr("data-filter");
+          $gallery.isotope({ filter: filterValue });
+          console.log("Filter value: " + filterValue);
+        });
+
+        /* Tabs */
+        $(".tabgroup > div").hide();
+        $(".tabgroup > div:first-of-type").show();
+        $(".tabs a").click(function(e) {
+          e.preventDefault();
+          var $this = $(this),
+            tabgroup = "#" + $this.parents(".tabs").data("tabgroup"),
+            others = $this
+              .closest("li")
+              .siblings()
+              .children("a"),
+            target = $this.attr("href");
+          others.removeClass("active");
+          $this.addClass("active");
+
+          // Scroll to tab content (for mobile)
+          if ($(window).width() < 992) {
+            $("html, body").animate(
+              {
+                scrollTop: $("#tmGallery").offset().top
+              },
+              200
+            );
+          }
+        });
+      };
+    </script>
+   
   </body>
 </html>
